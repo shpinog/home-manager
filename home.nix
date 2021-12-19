@@ -4,20 +4,20 @@
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   imports = [
-      ./programs.nix
-      ./packages.nix
-      ./settings.nix
-      ./config-files.nix
-      ./aliases.nix
-      ./sway.nix
-    ];
-    
+    ./programs.nix
+    ./packages.nix
+    ./settings.nix
+    ./config-files.nix
+    ./aliases.nix
+    ./sway.nix
+  ];
+
   home.username = "shpinog";
   home.homeDirectory = "/home/shpinog";
-  
 
-    
-  
+
+
+
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

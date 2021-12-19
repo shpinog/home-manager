@@ -1,12 +1,11 @@
-
 { config, pkgs, ... }: {
 
 
-programs.bash.shellAliases = {
+  programs.bash.shellAliases = {
 
-em = "emacsclient -c -t ";
-vim = "nvim";
+    em = "emacsclient -c -t ";
+    vim = "nvim";
 
-};
+  };
 
 }
