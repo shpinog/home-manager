@@ -31,23 +31,23 @@ set $right l
 
 ### Output configuration
 
-set $output-left DVI-I-2
+set $output-left DVI-D-1
 set $output-center VGA-1
-set $output-right  HDMI-A-2
+set $output-right HDMI-A-1
 
 
 
 output  $output-left  pos 0 0 res 1280x1024
-output  $output-left  max_render_time 20
+#output  $output-left  max_render_time 20
 output  $output-left  subpixel rgb
 
-output  $output-center pos 1280 0 res 1600x900
+output  $output-center pos 1280 0 res 1600x900@59.978hz
 output  $output-center  subpixel rgb
-output  $output-center  max_render_time 20
+#output  $output-center  max_render_time 20
 
 output  $output-right pos 2880 0 res 1280x1024
 output  $output-right subpixel rgb
-output  $output-right  max_render_time 20
+#output  $output-right  max_render_time 20
 
 
 
@@ -77,7 +77,7 @@ output  $output-right  max_render_time 20
 ### Input configuration
 #
 # Example configuration:
-#
+# 
 #   input "2:14:SynPS/2_Synaptics_TouchPad" {
 #       dwt enabled
 #       tap enabled
@@ -88,23 +88,134 @@ output  $output-right  max_render_time 20
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 #
+### Workspaces:
+#
+    # Workspace names primary-output
+    set $ws1 "1": 🖥
+    set $ws2 "2": 🌐
+    set $ws3 "3": 
+    set $ws4 "4": 🎮
+    set $ws5 "5": 🎧
+    set $ws6 "6": 💬
+    set $ws7 "7"
+    set $ws8 "8"
+    set $ws9 "9"
+    # Workspace names second-output
+    set $ws11 "11": 🖥*
+    set $ws12 "12": 🌐*
+    set $ws13 "13": *
+    set $ws14 "14": 🎮*
+    set $ws15 "15": 🎧*
+    set $ws16 "16": 💬*
+    set $ws17 "17"  💾* 
+  
 
-#Binding to open a program on a new workspace
-set $workspace_new swaymsg -t get_workspaces -r | expr $(jq '[.[].num] | max') + 1 | xargs swaymsg workspace number && swaymsg exec --
+# Set first monitor workspaces to first monitor
+workspace $ws1 output $output-left
+workspace $ws3 output $output-left
+workspace $ws4 output $output-left
+workspace $ws5 output $output-left
+workspace $ws6 output $output-left
+workspace $ws7 output $output-left
+workspace $ws8 output $output-left
+workspace $ws9 output $output-left
+
+# Set center monitor workspaces to first monitor
+
+workspace $ws2 output $output-center
+
+# Set second monitor workspaces to second monitor
+workspace $ws11 output $output-right
+workspace $ws12 output $output-right
+workspace $ws13 output $output-right
+workspace $ws14 output $output-right
+workspace $ws15 output $output-right
+workspace $ws16 output $output-right
+workspace $ws17 output $output-right
+workspace $ws18 output $output-right
+workspace $ws19 output $output-right
+
 
 # Your apps
 set $terminal foot
-set $browser chromium
+set $browser firefox
+set $browserClass Chromium-browser
 set $browserID chromium-browser
 set $filemanager nautilus
 set $filemanagerID org.gnome.Nautilus
-set $editor codium --enable-features=UseOzonePlatform --ozone-platform=wayland
-set $editorID VSCodium
+set $editor sublime4
+#set $editor codium --enable-features=UseOzonePlatform --ozone-platform=wayland
+set $editorID1 VSCodium
+set $editorID2 sublime_text
+
 set $telegram telegram-desktop
 set $spotify spotify
 set $player mpv
 
 
+
+
+
+    ### Assign apps to workspaces
+                                    
+                                    ####-1-####
+
+    assign [app_id="$terminal"] → $ws1
+    for_window [app_id="$terminal"] move window to workspace "$ws1", focus, opacity $opacity
+                                    
+                                    ####-2-####
+
+    assign [app_id="^firefox"] → $ws2
+    for_window [app_id="firefox"] move window to workspace "$ws2", focus
+    
+    assign [app_id="^&browserID"] → $ws2
+    for_window [app_id="$browserID"] move window to workspace "$ws2", focus
+    
+    assign [class="^$browserClass"] → $ws2
+    for_window [class="$browserClass"] move window to workspace "$ws2", focus
+                                    
+                                    ####-3-####
+   
+    
+    assign [app_id="^$editorID1"] → $ws13
+    assign [app_id="^$editorID2"] → $ws13
+    for_window [app_id="^$editorID1"] move window to workspace "$ws13", focus
+    for_window [app_id="^$editorID2"] move window to workspace "$ws13", focus
+
+                                    
+                                    ####-4-####
+    assign [class="^Steam"] → $ws4
+    assign [class="^dota2"] → $ws4
+    assign [app_id="mpv"] → $ws14      
+    for_window [app_id="mpv"] move window to workspace "$ws14", focus      
+                                    
+                                    ####-5-####
+
+    for_window [class="Spotify"] move window to workspace "$ws15", focus
+
+                                    
+                                    ####-6-####
+
+    assign [app_id="^kotatogramdesktop"] → $ws16
+    assign [app_id="^telegramdesktop"] → $ws16
+    for_window [app_id="^kotatogramdesktop"] move window to workspace "$ws16", focus
+    for_window [app_id="^telegramdesktop"] move window to workspace "$ws16", focus
+
+                                    ####-7-####
+
+    assign [app_id="^$filemanagerID"] → $ws17
+    for_window [app_id="^$filemanagerID"] move window to workspace "$ws17", focus
+ 
+
+                                # Auto float apps
+
+    for_window [app_id="gnome-calculator"] floating enable
+    #for_window [class="^Caja$"] floating enable
+    for_window [app_id="^mpv$"] floating enable
+    for_window [app_id="pavucontrol"] floating enable
+    for_window [class="^Thunar$"] floating enable
+    for_window [class="^steam$"] floating enable
+    for_window [title="Firefox - Sharing Indicator"] floating enable
 
 
 
@@ -187,53 +298,7 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
     bindsym --to-code $mod+Shift+Up move up
     bindsym --to-code $mod+Shift+Right move right
 #
-### Workspaces:
-#
-    # Workspace names primary-output
-    set $ws1 "1": 🖥
-    set $ws2 "2": 🌐
-    set $ws3 "3": 
-    set $ws4 "4": 🎮
-    set $ws5 "5": 🎧
-    set $ws6 "6": 💬
-    set $ws7 "7"
-    set $ws8 "8"
-    set $ws9 "9"
-    # Workspace names second-output
-    set $ws11 "11": 🖥*
-    set $ws12 "12": 🌐*
-    set $ws13 "13": *
-    set $ws14 "14": 🎮*
-    set $ws15 "15": 🎧*
-    set $ws16 "16": 💬*
-    set $ws17 "17"  💾* 
-  
-
-# Set first monitor workspaces to first monitor
-workspace $ws1 output $output-left
-workspace $ws3 output $output-left
-workspace $ws4 output $output-left
-workspace $ws5 output $output-left
-workspace $ws6 output $output-left
-workspace $ws7 output $output-left
-workspace $ws8 output $output-left
-workspace $ws9 output $output-left
-
-# Set center monitor workspaces to first monitor
-
-workspace $ws2 output $output-center
-
-# Set second monitor workspaces to second monitor
-workspace $ws11 output $output-right
-workspace $ws12 output $output-right
-workspace $ws13 output $output-right
-workspace $ws14 output $output-right
-workspace $ws15 output $output-right
-workspace $ws16 output $output-right
-workspace $ws17 output $output-right
-workspace $ws18 output $output-right
-workspace $ws19 output $output-right
-
+#include /home/shpinog/.config/sway/config.d/*
 
 # Switch to workspace
     bindsym $mod+1 workspace $ws1
@@ -287,62 +352,7 @@ workspace $ws19 output $output-right
     bindsym Mod1+Tab workspace back_and_forth
     bindsym $mod+Tab workspace next
 
-### Assign apps to workspaces
-                                    
-                                    ####-1-####
 
-    assign [app_id="^$terminal"] → $ws1
-    for_window [app_id="$terminal"] move window to workspace "$ws1", focus, opacity $opacity
-                                    
-                                    ####-2-####
-
-    assign [app_id="^firefox"] → $ws2
-    for_window [app_id="firefox"] move window to workspace "$ws2", focus
-    assign [app_id="^&browserID"] → $ws2
-    for_window [app_id="$browserID"] move window to workspace "$ws2", focus
-    assign [class="^$browser"] → $ws2
-    for_window [class="$browser"] move window to workspace "$ws2", focus
-                                    
-                                    ####-3-####
-   
-    
-    assign [app_id="^$editorID"] → $ws13
-    for_window [app_id="^$editorID"] move window to workspace "$ws13", focus
-
-                                    
-                                    ####-4-####
-    assign [class="^Steam"] → $ws4
-    assign [class="^dota2"] → $ws4
-    assign [app_id="mpv"] → $ws14      
-    for_window [app_id="mpv"] move window to workspace "$ws14", focus      
-                                    
-                                    ####-5-####
-
-    for_window [class="Spotify"] move window to workspace "$ws15", focus
-
-                                    
-                                    ####-6-####
-
-    assign [app_id="^kotatogramdesktop"] → $ws16
-    assign [app_id="^telegramdesktop"] → $ws16
-    for_window [app_id="^kotatogramdesktop"] move window to workspace "$ws16", focus
-    for_window [app_id="^telegramdesktop"] move window to workspace "$ws16", focus
-
-                                    ####-7-####
-
-    assign [app_id="^$filemanagerID"] → $ws17
-    for_window [app_id="^$filemanagerID"] move window to workspace "$ws17", focus
- 
-
-                                # Auto float apps
-
-    for_window [app_id="gnome-calculator"] floating enable
-    #for_window [class="^Caja$"] floating enable
-    for_window [app_id="^mpv$"] floating enable
-    for_window [app_id="pavucontrol"] floating enable
-    for_window [class="^Thunar$"] floating enable
-    for_window [class="^steam$"] floating enable
-    for_window [title="Firefox - Sharing Indicator"] floating enable
 
 ### opacity
     set $opacity 0.9
@@ -433,15 +443,6 @@ bar {
     position top
     swaybar_command waybar
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
 }
 
 ##autostart

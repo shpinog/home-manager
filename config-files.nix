@@ -10,9 +10,16 @@
     source = "/home/shpinog/.config/nixpkgs/configFiles/waybar";
   };
 
+  #sway configuration files
+ 
+  xdg.configFile."sway" = {
+    recursive = false;
+    source = "/home/shpinog/.config/nixpkgs/configFiles/sway";
+  };
+
   home.file = {
     ".config/kitty/kitty.conf".source = /home/shpinog/.config/nixpkgs/configFiles/kitty.conf; #kitty config
-    ".config/sway/config".source = /home/shpinog/.config/nixpkgs/configFiles/sway/config; #sway config
+  #  ".config/sway/config".source = /home/shpinog/.config/nixpkgs/configFiles/sway/config; #sway config
 
 
 

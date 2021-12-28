@@ -10,6 +10,7 @@
     ./config-files.nix
     ./aliases.nix
     ./sway.nix
+    ./environment.nix
   ];
 
   home.username = "shpinog";
