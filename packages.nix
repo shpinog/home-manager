@@ -1,7 +1,4 @@
 { config, pkgs, ... }:
-let
-  unstable = import <nixos-unstable> { };
-in
 {
 
   nixpkgs.config.allowUnfree = true;
@@ -44,7 +41,7 @@ in
     sway
     swayidle
     wl-clipboard
-    unstable.wl-clipboard-x11
+    wl-clipboard-x11
     mako # notification daemon
     waybar
     xdg-desktop-portal
