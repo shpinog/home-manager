@@ -113,7 +113,6 @@ output  $output-right subpixel rgb
 # Set first monitor workspaces to first monitor
 workspace $ws1 output $output-left
 workspace $ws3 output $output-left
-workspace $ws4 output $output-left
 workspace $ws5 output $output-left
 workspace $ws6 output $output-left
 workspace $ws7 output $output-left
@@ -123,6 +122,7 @@ workspace $ws9 output $output-left
 # Set center monitor workspaces to first monitor
 
 workspace $ws2 output $output-center
+workspace $ws4 output $output-center
 
 # Set second monitor workspaces to second monitor
 workspace $ws11 output $output-right
@@ -186,8 +186,10 @@ set $player mpv
                                     ####-4-####
     assign [class="^Steam"] → $ws4
     assign [class="^dota2"] → $ws4
+    assign [app_id="^dota2"] → $ws4
     assign [app_id="mpv"] → $ws14      
-    for_window [app_id="mpv"] move window to workspace "$ws14", focus      
+    for_window [app_id="mpv"] move window to workspace "$ws14", focus
+    for_window [app_id="dota2"] move window to workspace "$ws4", focus      
                                     
                                     ####-5-####
 
@@ -250,9 +252,14 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
     # take  --to-codescreen
     bindsym --to-code $mod+p exec grim -g "$(slurp)" -t png - | wl-copy -t image/png
     
-    
+    # Display sleep | disable keys
     bindsym $mod+F12 exec swaymsg "output * dpms off"
     bindsym $mod+F11 exec swaymsg "output * dpms on"
+    bindsym $mod+F10 exec swaymsg "output DVI-D-1 dpms off" | swaymsg "output HDMI-A-1 dpms off"
+    bindsym $mod+F9  exec swaymsg "output DVI-D-1 dpms on"  | swaymsg "output HDMI-A-1 dpms on"
+    bindsym $mod+F8  exec swaymsg "output DVI-D-1 disable" | swaymsg "output HDMI-A-1 disable"
+    bindsym $mod+F7  exec swaymsg "output DVI-D-1 enable"  | swaymsg "output HDMI-A-1 enable"
+
 
 
     # Kill  --to-codefocused window

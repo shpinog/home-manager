@@ -1,15 +1,14 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   imports = [
-    ./programs.nix
+    ./programs/programs.nix
     ./packages.nix
     ./settings.nix
     ./config-files.nix
     ./aliases.nix
-    ./sway.nix
     ./environment.nix
   ];
 

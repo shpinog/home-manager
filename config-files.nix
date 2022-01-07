@@ -11,7 +11,7 @@
   };
 
   #sway configuration files
- 
+
   xdg.configFile."sway" = {
     recursive = false;
     source = "/home/shpinog/.config/nixpkgs/configFiles/sway";
@@ -19,10 +19,7 @@
 
   #foot configuration files
 
-  xdg.configFile."foot" = {
-    recursive = false;
-    source = "/home/shpinog/.config/nixpkgs/configFiles/foot";
-  };
+
 
 
   home.file = {

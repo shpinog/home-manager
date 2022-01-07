@@ -9,6 +9,9 @@
 
   };
 
+
+  services.kanshi.enable = false;
+
   home.packages = with pkgs; [
     swayidle
     wl-clipboard
@@ -17,6 +20,7 @@
     xdg-desktop-portal
     xdg-desktop-portal-wlr
     grim
+    kanshi
 
   ];
 }
