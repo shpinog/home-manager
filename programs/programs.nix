@@ -3,6 +3,7 @@
   imports = [
     ./sway.nix
     ./nvim.nix
+    ./firefox.nix
 
   ];
 
@@ -29,14 +30,14 @@
     chromium = {
       enable = true;
       package = pkgs.chromium.override ({
-        commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland --flag-switches-begin --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --enable-features=UseOzonePlatform,NativeNotifications,VaapiVideoDecoder,WebRTCPipeWireCapturer --flag-switches-end";
+        commandLineArgs = " --ignore-gpu-blocklist --enable-zero-copy --enable-gpu-rasterization   --disable-gpu-driver-bug-workarounds --enable-features=VaapiVideoDecoder --use-angle=gl --flag-switches-end";
         #commandLineArgs = "--flag-switches-begin  --use-angle=vulkan --use-cmd-decoder=passthrough --ignore-gpu-blocklist --enable-features=NativeNotifications,VaapiVideoDecoder,WebRTCPipeWireCapturer --flag-switches-end";
 
       });
 
     };
 
-  
+
 
     foot = {
       enable = true;

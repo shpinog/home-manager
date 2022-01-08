@@ -5,9 +5,22 @@
   home.packages = with pkgs; [
     wireguard
     fd
-    #editors
+    #
+    #Editors
+    #
     neovide
     geany-with-vte
+    sublime4
+    pavucontrol
+    #
+    #Media
+    #
+    spotify
+    mpv
+    okular
+    lxappearance
+    ffmpeg-full
+    audio-recorder
     #
     htop
     github-desktop
@@ -19,7 +32,6 @@
     smplayer
     discord
     breeze-qt5
-    mpv
     ddrescue
     udiskie
     usbutils
@@ -31,15 +43,10 @@
     #
     qbittorrent
     networkmanagerapplet
-    okular
-    lxappearance
-    ffmpeg-full
     peek
-    pavucontrol
-    audio-recorder
-    gnome3.adwaita-icon-theme
-    hicolor_icon_theme
-    #sway
+
+
+    ###sway
     swayidle
     mako # notification daemon
     waybar
@@ -50,8 +57,12 @@
     slurp # wayland
     sway
     wl-clipboard
-    wl-clipboard-x11
- 
- 
+    swaybg
+    wofi
+    flashfocus
+    autotiling
+    swaykbdd
+    jq
+
   ];
 }

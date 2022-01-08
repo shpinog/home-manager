@@ -1,0 +1,38 @@
+{ config, pkgs, ... }: {
+
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox-wayland;
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      https-everywhere
+      bitwarden
+      ublock-origin
+      violentmonkey
+      translate-web-pages
+    ];
+    profiles = {
+      shpinog = {
+        isDefault = true;
+        settings = {
+          "browser.startup.homepage" = "https://nixos.org";
+          "browser.search.region" = "RU";
+          "browser.search.isUS" = false;
+          "distribution.searchplugins.defaultLocale" = "ru-RU";
+          "general.useragent.locale" = "ru-RU";
+          "browser.bookmarks.showMobileBookmarks" = true;
+        };
+
+        bookmarks = {
+          NixSearch = {
+            keyword = "Nix";
+            url = "https://search.nixos.org";
+          };
+          "Home-manager options" = {
+            url = "https://rycee.gitlab.io/home-manager/options.html";
+          };
+        };
+      };
+    };
+  };
+
+}

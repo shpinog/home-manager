@@ -26,10 +26,8 @@
         "audio/ogg" = [ "mpv.desktop" "vlc.desktop" ];
 
       };
-      associations.added = {
+      associations.added = { };
 
-      };
-    
     };
   };
 

@@ -31,7 +31,7 @@ set $right l
 
 ### Output configuration
 
-set $output-left DVI-D-1
+set $output-left DVI-I-1
 set $output-center VGA-1
 set $output-right HDMI-A-1
 
@@ -42,7 +42,7 @@ output  $output-left  pos 0 0 res 1280x1024
 output  $output-left  subpixel rgb
 
 output  $output-center pos 1280 0 res 1600x900@59.978hz
-#output  $output-center  subpixel rgb
+output  $output-center  subpixel rgb
 #output  $output-center  max_render_time 20
 
 output  $output-right pos 2880 0 res 1280x1024
