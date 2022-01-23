@@ -322,20 +322,7 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
     bindsym Mod1+4 workspace $ws14
     bindsym Mod1+5 workspace $ws15
     bindsym Mod1+6 workspace $ws16
-
     
-    
-    mode "mode_game" {
-    bindsym F11+1 workspace $ws11
-    bindsym F11+2 workspace $ws12
-    bindsym F11+3 workspace $ws13
-    bindsym F11+4 workspace $ws14
-    bindsym F11+5 workspace $ws15
-    bindsym F11+6 workspace $ws16
-    bindsym $mod+m mode "default"
-    }
-    bindsym $mod+m mode "mode_game"
-
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace $ws1
     bindsym $mod+Shift+2 move container to workspace $ws2

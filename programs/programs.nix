@@ -1,13 +1,15 @@
 { config, pkgs, ... }: {
 
   imports = [
-    ./sway.nix
+    #./sway.nix
     ./nvim.nix
     ./firefox.nix
+    ./foot.nix
+    ./fish.nix
 
   ];
 
-
+ 
   gtk = {
     enable = true;
     theme = {
@@ -26,6 +28,7 @@
 
 
   programs = {
+
 
     chromium = {
       enable = true;

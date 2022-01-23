@@ -3,6 +3,9 @@
 
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
+    #shells
+    xonsh
+    #
     wireguard
     fd
     #
@@ -44,7 +47,9 @@
     qbittorrent
     networkmanagerapplet
     peek
-
+    #disk
+    gptfdisk
+    util-linux
 
     ###sway
     swayidle
@@ -63,6 +68,16 @@
     autotiling
     swaykbdd
     jq
+    #
+      swayidle
+    wl-clipboard
+    mako # notification daemon
+    waybar
+    xdg-desktop-portal
+    xdg-desktop-portal-wlr
+    grim
+    kanshi
+    
 
   ];
 }
