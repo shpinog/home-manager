@@ -113,7 +113,6 @@ output  $output-right subpixel rgb
 # Set first monitor workspaces to first monitor
 workspace $ws1 output $output-left
 workspace $ws3 output $output-left
-workspace $ws4 output $output-left
 workspace $ws5 output $output-left
 workspace $ws6 output $output-left
 workspace $ws7 output $output-left
@@ -123,12 +122,13 @@ workspace $ws9 output $output-left
 # Set center monitor workspaces to first monitor
 
 workspace $ws2 output $output-center
-workspace $ws14 output $output-center
+workspace $ws4 output $output-center
 
 # Set second monitor workspaces to second monitor
 workspace $ws11 output $output-right
 workspace $ws12 output $output-right
 workspace $ws13 output $output-right
+workspace $ws14 output $output-right
 workspace $ws15 output $output-right
 workspace $ws16 output $output-right
 workspace $ws17 output $output-right
@@ -185,8 +185,8 @@ set $player mpv
                                     
                                     ####-4-####
     assign [class="^Steam"] → $ws4
-    assign [class="^dota2"] → $ws14
-    assign [app_id="^dota2"] → $ws14
+    assign [class="^dota2"] → $ws4
+    assign [app_id="^dota2"] → $ws4
     assign [app_id="mpv"] → $ws14      
     for_window [app_id="mpv"] move window to workspace "$ws14", focus
     for_window [app_id="dota2"] move window to workspace "$ws4", focus      
@@ -480,7 +480,6 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec wl-paste -t text --watch clipman store --no-persist
-exec swaykbdd
 
 ##gtk theme
 exec_always {

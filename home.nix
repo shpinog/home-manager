@@ -10,16 +10,12 @@
     ./config-files.nix
     ./aliases.nix
     ./environment.nix
+    ./config.nix
   ];
 
   home.username = "shpinog";
   home.homeDirectory = "/home/shpinog";
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-      inherit pkgs;
-    };
-  };
 
 
   # This value determines the Home Manager release that your

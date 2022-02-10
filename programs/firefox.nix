@@ -9,6 +9,7 @@
       ublock-origin
       violentmonkey
       translate-web-pages
+      languagetool
     ];
     profiles = {
       shpinog = {
@@ -24,11 +25,13 @@
 
         bookmarks = {
           NixSearch = {
-            keyword = "Nix";
+            keyword = "nix";
             url = "https://search.nixos.org";
           };
           "Home-manager options" = {
             url = "https://rycee.gitlab.io/home-manager/options.html";
+            keyword = "home";
+
           };
         };
       };

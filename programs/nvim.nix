@@ -17,6 +17,9 @@
       yankring
       vim-nix
       YouCompleteMe
+      suda-vim
+      vim-wayland-clipboard
+      vim-sandwich      
 
       {
         plugin = YouCompleteMe;
@@ -33,7 +36,6 @@
     if !empty(&viminfo)
           set viminfo^=!
           endif
-
     '';
 
   };

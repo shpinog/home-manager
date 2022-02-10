@@ -4,7 +4,6 @@
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     #shells
-    xonsh
     #
     wireguard
     fd
@@ -52,6 +51,7 @@
     util-linux
 
     ###sway
+    swaykbdd
     swayidle
     mako # notification daemon
     waybar
@@ -60,7 +60,6 @@
     grim
     kanshi
     slurp # wayland
-    sway
     wl-clipboard
     swaybg
     wofi

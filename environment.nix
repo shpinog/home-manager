@@ -7,7 +7,6 @@
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     vblank_mode = "0";
-    WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0"; # AMDGPU + nauveau
     #WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1"; # radeon + nauveau
     #Nvidia X11
     #nvidia wayland
