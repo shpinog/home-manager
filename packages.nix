@@ -9,20 +9,29 @@
     fd
     #
     #Editors
-    #
+    ##vim
     neovide
+    vimPlugins.packer-nvim
+    sumneko-lua-language-server
+    ripgrep # reipgrep for telescope pluging
+
+    ##
     geany-with-vte
     sublime4
     pavucontrol
     #
     #Media
     #
+    gnome.eog
     spotify
     mpv
     okular
     lxappearance
     ffmpeg-full
     audio-recorder
+    #
+    rustc
+    cargo
     #
     htop
     github-desktop

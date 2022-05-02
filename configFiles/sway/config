@@ -143,7 +143,7 @@ set $browserClass Chromium-browser
 set $browserID chromium-browser
 set $filemanager nautilus
 set $filemanagerID org.gnome.Nautilus
-set $editor neovide
+set $editor foot -a TermVim vim
 #set $editor codium --enable-features=UseOzonePlatform --ozone-platform=wayland
 set $editorID1 VSCodium
 set $editorID2 sublime_text
@@ -179,8 +179,11 @@ set $player mpv
     
     assign [app_id="^$editorID1"] → $ws13
     assign [app_id="^$editorID2"] → $ws13
+    assign [app_id="TermVim"] → $ws3
+
     for_window [app_id="^$editorID1"] move window to workspace "$ws13", focus
     for_window [app_id="^$editorID2"] move window to workspace "$ws13", focus
+    for_window [app_id="TermVim"] move window to workspace "$ws3", focus
 
                                     
                                     ####-4-####
@@ -189,7 +192,7 @@ set $player mpv
     assign [app_id="^dota2"] → $ws14
     assign [app_id="mpv"] → $ws14      
     for_window [app_id="mpv"] move window to workspace "$ws14", focus
-    for_window [app_id="dota2"] move window to workspace "$ws4", focus      
+    for_window [app_id="^dota2"] move window to workspace "$ws14", focus      
                                     
                                     ####-5-####
 
@@ -481,6 +484,7 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec wl-paste -t text --watch clipman store --no-persist
 exec swaykbdd
+exec  xrandr --output XWAYLAND2 --primary
 
 ##gtk theme
 exec_always {

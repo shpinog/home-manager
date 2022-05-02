@@ -77,9 +77,6 @@
 
     };
 
-    starship = {
-      enable = true;
-    };
 
     bash = {
       enable = true;
