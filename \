@@ -20,10 +20,6 @@ default_border none
 set $mod Mod4
 
 # Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
 
 #Swaybg
 
@@ -52,42 +48,6 @@ output  $output-right subpixel rgb
 
 
 #
-# Default wallpaper
-#output * bg ~/.config/sway/backgrounds/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
-
-### Idle configuration
-#
-# Example configuration:
-#
-
-
-
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-# 
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
-#
 ### Workspaces:
 #
     # Workspace names primary-output
@@ -113,6 +73,7 @@ output  $output-right subpixel rgb
 # Set first monitor workspaces to first monitor
 workspace $ws1 output $output-left
 workspace $ws3 output $output-left
+workspace $ws4 output $output-left
 workspace $ws5 output $output-left
 workspace $ws6 output $output-left
 workspace $ws7 output $output-left
@@ -122,13 +83,12 @@ workspace $ws9 output $output-left
 # Set center monitor workspaces to first monitor
 
 workspace $ws2 output $output-center
-workspace $ws4 output $output-center
+workspace $ws14 output $output-center
 
 # Set second monitor workspaces to second monitor
 workspace $ws11 output $output-right
 workspace $ws12 output $output-right
 workspace $ws13 output $output-right
-workspace $ws14 output $output-right
 workspace $ws15 output $output-right
 workspace $ws16 output $output-right
 workspace $ws17 output $output-right
@@ -137,13 +97,13 @@ workspace $ws19 output $output-right
 
 
 # Your apps
-set $terminal foot
+set $terminal alacritty
 set $browser firefox
 set $browserClass Chromium-browser
 set $browserID chromium-browser
-set $filemanager nautilus
+set $filemanager thunar
 set $filemanagerID org.gnome.Nautilus
-set $editor neovide
+set $editor alacritty --class TermVim -e vim
 #set $editor codium --enable-features=UseOzonePlatform --ozone-platform=wayland
 set $editorID1 VSCodium
 set $editorID2 sublime_text
@@ -159,9 +119,10 @@ set $player mpv
     ### Assign apps to workspaces
                                     
                                     ####-1-####
-
     assign [app_id="$terminal"] → $ws1
+    assign [app_id="Alacritty"] → $ws1
     for_window [app_id="$terminal"] move window to workspace "$ws1", focus, opacity $opacity
+    for_window [app_id="Alacritty"] move window to workspace "$ws1", focus, opacity $opacity
                                     
                                     ####-2-####
 
@@ -179,17 +140,20 @@ set $player mpv
     
     assign [app_id="^$editorID1"] → $ws13
     assign [app_id="^$editorID2"] → $ws13
+    assign [app_id="TermVim"] → $ws3
+
     for_window [app_id="^$editorID1"] move window to workspace "$ws13", focus
     for_window [app_id="^$editorID2"] move window to workspace "$ws13", focus
+    for_window [app_id="TermVim"] move window to workspace "$ws3", focus
 
                                     
                                     ####-4-####
     assign [class="^Steam"] → $ws4
-    assign [class="^dota2"] → $ws4
-    assign [app_id="^dota2"] → $ws4
+    assign [class="^dota2"] → $ws14
+    assign [app_id="^dota2"] → $ws14
     assign [app_id="mpv"] → $ws14      
     for_window [app_id="mpv"] move window to workspace "$ws14", focus
-    for_window [app_id="dota2"] move window to workspace "$ws4", focus      
+    for_window [app_id="^dota2"] move window to workspace "$ws14", focus      
                                     
                                     ####-5-####
 
@@ -288,17 +252,12 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
     bindsym --to-code $mod+j focus down
     bindsym --to-code $mod+k focus up
     bindsym --to-code $mod+h focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym  $mod+Right focus right
 
     # Move t he focused window with the same, but add Shift
-    bindsym --to-code $mod+Shift+$left move left
-    bindsym --to-code $mod+Shift+$down move down
-    bindsym --to-code $mod+Shift+$up move up
-    bindsym --to-code $mod+Shift+$right move right
+    bindsym --to-code $mod+Shift+h move left
+    bindsym --to-code $mod+Shift+jmove down
+    bindsym --to-code $mod+Shift+k move up
+    bindsym --to-code $mod+Shift+l move right
     # Ditto, with arrow keys
     bindsym --to-code $mod+Shift+Left move left
     bindsym --to-code $mod+Shift+Down move down
@@ -450,7 +409,6 @@ input * {
     xkb_options "grp:caps_toggle"
 }
 
-input <identifier> xkb_model "pc101"
 
 
 #
@@ -480,10 +438,12 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec wl-paste -t text --watch clipman store --no-persist
+exec swaykbdd
+exec  xrandr --output XWAYLAND2 --primary
 
 ##gtk theme
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'yaru-dark'
+    gsettings set $gnome-schema gtk-theme 'yaru'
     gsettings set $gnome-schema icon-theme 'yaru'
     gsettings set $gnome-schema cursor-theme 'yaru'
     gsettings set $gnome-schema font-name 'Noto'

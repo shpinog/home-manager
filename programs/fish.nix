@@ -1,5 +1,6 @@
 { config, pkgs, ... }: {
-programs.fish = {
+  programs.fish = {
     enable = true;
-};
+    package = pkgs.unstable.fish;
+  };
 }

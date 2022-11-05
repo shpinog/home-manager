@@ -3,7 +3,7 @@
     "exclusive": "false",
     "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 16, // Waybar height (to be removed for auto height)
-     "width": 10, // Waybar width
+     //"width": 10, // Waybar width
      
      
     // Choose the order of the modules
@@ -120,8 +120,8 @@
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "hands-free": "",
+            "headset": "",
             "phone": "",
             "portable": "",
             "car": "",

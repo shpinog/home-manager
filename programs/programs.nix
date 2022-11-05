@@ -1,4 +1,21 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }: 
+
+let
+  unstableTarball =
+    fetchTarball
+      https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+in
+
+  {
+
+    
+  nixpkgs.config = {
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball {
+        config = config.nixpkgs.config;
+      };
+    };
+  };
 
   imports = [
     #./sway.nix
@@ -6,10 +23,12 @@
     ./firefox.nix
     ./foot.nix
     ./fish.nix
+    ./alacritty.nix
+#    ./hyprland.nix
 
   ];
 
- 
+
   gtk = {
     enable = true;
     theme = {
@@ -30,31 +49,33 @@
   programs = {
 
 
-    chromium = {
+    bat = {
       enable = true;
-      package = pkgs.chromium.override ({
-        commandLineArgs = " --ignore-gpu-blocklist --enable-zero-copy --enable-gpu-rasterization   --disable-gpu-driver-bug-workarounds --enable-features=VaapiVideoDecoder --use-angle=gl --flag-switches-end";
-        #commandLineArgs = "--flag-switches-begin  --use-angle=vulkan --use-cmd-decoder=passthrough --ignore-gpu-blocklist --enable-features=NativeNotifications,VaapiVideoDecoder,WebRTCPipeWireCapturer --flag-switches-end";
-
-      });
-
+      config  = {
+        paging = "never";
+      };
     };
 
-
-
-    foot = {
+    fzf = {
       enable = true;
-      settings = {
-        main = {
-          term = "xterm-256color";
-          font = "Iosevka:size=14";
-          dpi-aware = "yes";
-        };
+      enableFishIntegration = true;
+    };
 
-        mouse = {
-          hide-when-typing = "yes";
-        };
-      };
+    zoxide = {
+      enable = true;
+      package = pkgs.unstable.zoxide;
+      enableFishIntegration = true;
+      
+    };
+    
+    lsd = {
+      enable = true;
+      enableAliases = true;
+    };
+    
+    broot = {
+      enable = true;
+      enableFishIntegration = true;
 
     };
 
@@ -78,14 +99,10 @@
     };
 
 
-    bash = {
-      enable = true;
-    };
+    # bash = {
+    #   enable = true;
+    # };
 
-    exa = {
-      enable = true;
-      enableAliases = true;
-    };
 
     mpv = {
       enable = true;
@@ -93,18 +110,16 @@
         {
           keepaspect = "yes";
           deband = "no";
-          force-window = true;
+    #      force-window = true;
           cache = "yes";
           cache-pause-initial = "yes";
           cache-pause-wait = "10";
           interpolation = "yes";
           video-sync = "display-resample";
           tscale = "oversample";
-          hwdec = "nvdec";
-          vo = "gpu";
           hwdec-codecs = "all";
           audio-channels = "stereo";
-          gpu-context = "x11vk";
+    #      gpu-context = "x11vk";
         };
     };
   };

@@ -1,18 +1,22 @@
 { config, pkgs, ... }:
 {
-
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
+    #comand line utils
+    # rust alanogs
+    du-dust
+    duf
+    fd
+    procs
     #shells
     #
-    wireguard
-    fd
     #
     #Editors
     ##vim
     neovide
+    rnix-lsp
+    gh
     vimPlugins.packer-nvim
-    sumneko-lua-language-server
     ripgrep # reipgrep for telescope pluging
 
     ##
@@ -22,6 +26,7 @@
     #
     #Media
     #
+    lutris
     gnome.eog
     spotify
     mpv
@@ -33,7 +38,6 @@
     rustc
     cargo
     #
-    htop
     github-desktop
     nmap
     tcpdump
@@ -59,6 +63,12 @@
     gptfdisk
     util-linux
 
+    # File Managers
+    xfce.thunar
+    xfce.thunar-volman
+    xfce.thunar-archive-plugin
+    xfce.thunar-media-tags-plugin
+
     ###sway
     swaykbdd
     swayidle
@@ -77,7 +87,7 @@
     swaykbdd
     jq
     #
-      swayidle
+    swayidle
     wl-clipboard
     mako # notification daemon
     waybar
@@ -85,7 +95,7 @@
     xdg-desktop-portal-wlr
     grim
     kanshi
-    
+
 
   ];
 }

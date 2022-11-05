@@ -22,10 +22,6 @@
 
 
 
-  home.file = {
-    ".config/kitty/kitty.conf".source = /home/shpinog/.config/nixpkgs/configFiles/kitty.conf; #kitty config
-
-  };
 
 
 

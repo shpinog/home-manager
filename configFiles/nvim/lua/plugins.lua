@@ -44,6 +44,7 @@ vim.cmd('COQnow -s')
     'cohama/lexima.vim',  -- Закрывает автоматом скобки
     'mattn/emmet-vim', -- Обрамляет строку в теги по ctrl- y + ,A
     'ms-jpq/coq_nvim',
+    "xiyaowong/coc-sumneko-lua",
 
   }
 

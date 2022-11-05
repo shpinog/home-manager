@@ -20,10 +20,6 @@ default_border none
 set $mod Mod4
 
 # Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
 
 #Swaybg
 
@@ -32,61 +28,20 @@ set $right l
 ### Output configuration
 
 set $output-left DP-3
-set $output-center DP-4
-set $output-right DP-2
+set $output-center DP-2
+set $output-right DP-1
 
 
 
-output  $output-left  pos 0 0 res 1280x1024
-#output  $output-left  max_render_time 20
-output  $output-left  subpixel rgb
+output  $output-left  pos 0 0 res 1280x1024 max_render_time 20 subpixel rgb
 
-output  $output-center pos 1280 0 res 1600x900@59.978hz
-output  $output-center  subpixel rgb
-#output  $output-center  max_render_time 20
+output  $output-center pos 1280 0 res 1600x900@59.978hz max_render_time 20 subpixel rgb
 
-output  $output-right pos 2880 0 res 1280x1024
-output  $output-right subpixel rgb
-#output  $output-right  max_render_time 20
+output  $output-right pos 2880 0 res 1280x1024 subpixel rgb max_render_time 20
 
 
 
-#
-# Default wallpaper
-#output * bg ~/.config/sway/backgrounds/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
 
-
-### Idle configuration
-#
-# Example configuration:
-#
-
-
-
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-# 
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
 #
 ### Workspaces:
 #
@@ -137,13 +92,13 @@ workspace $ws19 output $output-right
 
 
 # Your apps
-set $terminal foot
+set $terminal alacritty
 set $browser firefox
 set $browserClass Chromium-browser
 set $browserID chromium-browser
-set $filemanager nautilus
-set $filemanagerID org.gnome.Nautilus
-set $editor foot -a TermVim vim
+set $filemanager thunar
+set $filemanagerID thunar
+set $editor alacritty --class TermVim -e vim
 #set $editor codium --enable-features=UseOzonePlatform --ozone-platform=wayland
 set $editorID1 VSCodium
 set $editorID2 sublime_text
@@ -159,9 +114,10 @@ set $player mpv
     ### Assign apps to workspaces
                                     
                                     ####-1-####
-
     assign [app_id="$terminal"] → $ws1
+    assign [app_id="Alacritty"] → $ws1
     for_window [app_id="$terminal"] move window to workspace "$ws1", focus, opacity $opacity
+    for_window [app_id="Alacritty"] move window to workspace "$ws1", focus, opacity $opacity
                                     
                                     ####-2-####
 
@@ -177,22 +133,22 @@ set $player mpv
                                     ####-3-####
    
     
-    assign [app_id="^$editorID1"] → $ws13
-    assign [app_id="^$editorID2"] → $ws13
-    assign [app_id="TermVim"] → $ws3
+    assign [app_id="^$editorID1"] → $ws3
+    assign [app_id="^$editorID2"] → $ws3
+    assign [app_id="TermVim"] → $ws13
 
     for_window [app_id="^$editorID1"] move window to workspace "$ws13", focus
     for_window [app_id="^$editorID2"] move window to workspace "$ws13", focus
-    for_window [app_id="TermVim"] move window to workspace "$ws3", focus
+    for_window [app_id="TermVim"] move window to workspace "$ws13", focus
 
                                     
                                     ####-4-####
     assign [class="^Steam"] → $ws4
     assign [class="^dota2"] → $ws14
-    assign [app_id="^dota2"] → $ws14
     assign [app_id="mpv"] → $ws14      
     for_window [app_id="mpv"] move window to workspace "$ws14", focus
-    for_window [app_id="^dota2"] move window to workspace "$ws14", focus      
+    for_window [app_id="dota2"] move window to workspace "$ws14", focus      
+    assign [app_id="dota2"] → $ws14
                                     
                                     ####-5-####
 
@@ -225,14 +181,8 @@ set $player mpv
 
 
 
-#####flashfocus
 
 
-
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
 ### Key bindings
 #
@@ -287,26 +237,18 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 # Moving around:
 #
     # Move your focus around
-    bindsym --to-code $mod+l focus left
+    bindsym --to-code $mod+h focus left
     bindsym --to-code $mod+j focus down
     bindsym --to-code $mod+k focus up
-    bindsym --to-code $mod+h focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym  $mod+Right focus right
+    bindsym --to-code $mod+l focus right
 
     # Move t he focused window with the same, but add Shift
-    bindsym --to-code $mod+Shift+$left move left
-    bindsym --to-code $mod+Shift+$down move down
-    bindsym --to-code $mod+Shift+$up move up
-    bindsym --to-code $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym --to-code $mod+Shift+Left move left
-    bindsym --to-code $mod+Shift+Down move down
-    bindsym --to-code $mod+Shift+Up move up
-    bindsym --to-code $mod+Shift+Right move right
+    bindsym --to-code $mod+Shift+h move left
+    bindsym --to-code $mod+Shift+j move down
+    bindsym --to-code $mod+Shift+k move up
+    bindsym --to-code $mod+Shift+l move right
+    bindsym --to-code $mod+KP_Multiply move container to workspace prev; workspace prev
+    bindsym --to-code $mod+KP_Subtract move container to workspace next; workspace next
 #
 #include /home/shpinog/.config/sway/config.d/*
 
@@ -412,8 +354,7 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 #
 # Scratchpad:
 #
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+   # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
     bindsym  --to-code $mod+n move scratchpad
@@ -421,30 +362,7 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym  --to-code $mod+Shift+n scratchpad show
-#
-# Resizing containers:
-#
-mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
 
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
-
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+i mode "resize"
 
 #
 #Keyboard layout
@@ -453,8 +371,12 @@ input * {
     xkb_options "grp:caps_toggle"
 }
 
-input <identifier> xkb_model "pc101"
 
+#Multimedia keys
+
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 #
 # Status Bar:
@@ -470,7 +392,7 @@ bar {
 
 ##autostart
 
-exec ~/.nix-profile/libexec/polkit-gnome-authentication-agent-1
+#exec ~/.nix-profile/libexec/polkit-gnome-authentication-agent-1
 
 exec autotiling
 exec_always --no-startup-id flashfocus

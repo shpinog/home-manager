@@ -8,7 +8,7 @@
       bitwarden
       ublock-origin
       violentmonkey
-      translate-web-pages
+      #translate-web-pages
       languagetool
     ];
     profiles = {

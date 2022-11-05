@@ -4,10 +4,10 @@
     enable = true;
     settings = {
       main = {
-        term = "xterm-256color";
+        term = "foot";
         login-shell = "yes";
         shell = "fish";
-        font = "Iosevka:size=14";
+        font = "Monospace:size=14";
         dpi-aware = "yes";
       };
 
